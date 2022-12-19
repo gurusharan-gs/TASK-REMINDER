@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>TASK REMINDER</title>
+   <style>
+     *{
+          padding: 0;margin: 0;box-sizing: border-box;
+     }
+     #container{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          width: 100%;
+     }
+       #reminder{
+          text-align: center;
+          border: 2px solid rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
+          width: 25%;
+          height: 300px;
+          margin: auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+
+
+     }
+     input{
+          height: 40px;
+          width: 80%;
+          font-size: 16px;
+          margin-top: 20px;
+     }
+     button{
+          padding: 10px 30px;
+          width: 80%;
+          margin-top: 20px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          font-weight: bold;
+          text-transform: uppercase;
+          cursor: pointer;
+          background-color: rgb(255, 64, 96);
+          color: #fff;
+     }
+   </style>
+</head>
+
+<body>
+     <div id="container">
+          <div id="reminder">
+               <h1 id="current_time">Alarm Clock</h1>
+               <input type="time" id="time"> <br>
+               <button onclick="submit()">submit</button>
+          </div>
+     </div>
+   
+</body>
+
+</html>
+
+<script>
+
+     let id;
+
+     let submit = () => {
+          let time = document.getElementById("time").value;
+          let [h, m] = time.split(":")
+          console.log(`${h}:${m}`)
+
+          id = setInterval(() => {
+               let current = new Date()
+               let hours = current.getHours()
+               let mins = current.getMinutes()
+               let sec = current.getSeconds()
+               console.log(current)
+
+               document.getElementById("current_time").innerHTML = `${hours} : ${mins} : ${sec}`
+
+               if (h == hours && m == mins) {
+                    let mp3 = `./alarm.mp3`
+                    new Audio(mp3).play()
+                    clearInterval(id)
+               }
+
+          }, 1000)
+
+     }
+     
+</script>
